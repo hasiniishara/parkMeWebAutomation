@@ -1,2 +1,2 @@
 # parkMeWebAutomation
-Instrauctions
+Instructions
