@@ -2,7 +2,6 @@ import pytest
 from testCases.conftest import setup, teardown
 from utilities.customLogger import LogGen
 from pageObjects.SigninPage import SigninPage
-from utilities.readProperties import ReadConfig
 
 
 class TestSigninPage:
@@ -11,8 +10,7 @@ class TestSigninPage:
     def setup_method(self):
         self.driver = setup()
         self.signinP= SigninPage(self.driver)
-        self.userName = ReadConfig.getUserName()
-        self.userPw = ReadConfig.getUserPassword()
+
 
     def teardown_method(self):
         teardown(self.driver)
@@ -24,5 +22,5 @@ class TestSigninPage:
 
     @pytest.mark.sanity
     def test_success_user_login(self):
-        self.signinP.successUserLogin(self.userName,self.userPw)
+        self.signinP.successUserLogin()
 
