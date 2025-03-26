@@ -7,6 +7,7 @@ class UserProfilePage:
 
     userProfileBtn = "//*[@id='root']/div/div[2]/div/div/div[1]/div/div/a"
     userProfilePageText = "//*[@id='root']/div/main/div/h1"
+    userProfileInputEle = "//input[contains(@class, 'Mui-disabled')]"
 
     def __init__(self, driver):
         self.driver = driver
@@ -27,3 +28,12 @@ class UserProfilePage:
             print(f"Error: {e}")
             return e
 
+    def checkUserProfileLockStatus(self):
+        InputElements = self.driver.find_elements(By.XPATH, self.userProfileInputEle)
+
+        all_disabled = True
+        for Inuput_Ele in InputElements:
+            if not Inuput_Ele.get_attribute("disabled"):
+                all_disabled = False
+
+        return all_disabled

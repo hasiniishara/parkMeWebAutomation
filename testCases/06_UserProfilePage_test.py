@@ -17,3 +17,10 @@ class TestUserProfile:
         userProfilePageTitle = self.userprofileP.loadUserProfilePage()
         assert "Profile" in userProfilePageTitle
 
+    @pytest.mark.sanity
+    def test_userProfile_lock_status(self):
+        self.signinP.successUserLogin()
+        self.userprofileP.loadUserProfilePage()
+        profile_lock_status = self.userprofileP.checkUserProfileLockStatus()
+        assert profile_lock_status,"User profile is not locked well!"
+
