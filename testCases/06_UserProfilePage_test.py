@@ -24,3 +24,17 @@ class TestUserProfile:
         profile_lock_status = self.userprofileP.checkUserProfileLockStatus()
         assert profile_lock_status,"User profile is not locked well!"
 
+    @pytest.mark.sanity
+    def test_userProfile_unlock_status(self):
+        self.signinP.successUserLogin()
+        self.userprofileP.loadUserProfilePage()
+        profile_unlock_status = self.userprofileP.checkUserProfileUnlockStatus()
+        assert profile_unlock_status, "User profile is not unlock for edit"
+
+    @pytest.mark.regression
+    def test_cancel_userProfile_update(self):
+        self.signinP.successUserLogin()
+        self.userprofileP.loadUserProfilePage()
+        userProfilePageTitle = self.userprofileP.cancelUserProfileUpdate()
+        assert "Profile" in userProfilePageTitle
+
