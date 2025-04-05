@@ -31,10 +31,17 @@ class TestUserProfile:
         profile_unlock_status = self.userprofileP.checkUserProfileUnlockStatus()
         assert profile_unlock_status, "User profile is not unlock for edit"
 
-    @pytest.mark.regression
+    @pytest.mark.sanity
     def test_cancel_userProfile_update(self):
         self.signinP.successUserLogin()
         self.userprofileP.loadUserProfilePage()
         userProfilePageTitle = self.userprofileP.cancelUserProfileUpdate()
         assert "Profile" in userProfilePageTitle
+
+    @pytest.mark.regression
+    def test_update_userProfile(self):
+        self.signinP.successUserLogin()
+        self.userprofileP.loadUserProfilePage()
+        edit_btn_available_Status = self.userprofileP.updateUserProfile()
+        assert edit_btn_available_Status, "Edit button is NOT visible!"
 

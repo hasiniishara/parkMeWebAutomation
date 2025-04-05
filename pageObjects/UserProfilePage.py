@@ -96,3 +96,29 @@ class UserProfilePage:
             print(f"Error: {e}")
             return e
 
+    def updateUserProfile(self):
+        try:
+            profileEditButton = WebDriverWait(self.driver, 40).until(
+                EC.presence_of_element_located((By.XPATH, self.userProfileEditBtn))
+            )
+            profileEditButton.click()
+            self.driver.find_element(By.ID, self.userProfileLastNameEle).send_keys(Keys.CONTROL + "a")
+            self.driver.find_element(By.ID, self.userProfileLastNameEle).send_keys(Keys.DELETE)
+            self.driver.find_element(By.ID, self.userProfileLastNameEle).send_keys("Isharaa")
+            self.driver.find_element(By.XPATH, self.userProfileUpdateBtn).click()
+
+            modal = WebDriverWait(self.driver, 10).until(
+                EC.visibility_of_element_located((By.CSS_SELECTOR, self.userProfileUpdateModal))
+            )
+
+            yes_button = self.driver.find_element(By.XPATH, self.userProfileYesUpdateBtn)
+            yes_button.click()
+
+            profileEditButton = WebDriverWait(self.driver, 40).until(
+                EC.presence_of_element_located((By.XPATH, self.userProfileEditBtn))
+            )
+            return profileEditButton.is_displayed()
+        except Exception as e:
+            print(f"Error: {e}")
+            return e
+
