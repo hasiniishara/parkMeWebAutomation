@@ -17,3 +17,9 @@ class TestUserProfile:
         addSlotPageTitle = self.addSlotP.loadAddSlotPage()
         assert "Add Parking Slot" in addSlotPageTitle
 
+    @pytest.mark.regression
+    def test_add_ParkingSlot(self):
+        self.signinP.successUserLogin()
+        self.addSlotP.loadAddSlotPage()
+        successMessage = self.addSlotP.addParkingSlot()
+        assert "Parking slot added successfully!" in successMessage

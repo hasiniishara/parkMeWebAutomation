@@ -38,7 +38,7 @@ class TestUserProfile:
         userProfilePageTitle = self.userprofileP.cancelUserProfileUpdate()
         assert "Profile" in userProfilePageTitle
 
-    @pytest.mark.regression
+    @pytest.mark.sanity
     def test_update_userProfile(self):
         self.signinP.successUserLogin()
         self.userprofileP.loadUserProfilePage()
