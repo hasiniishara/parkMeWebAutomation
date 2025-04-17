@@ -14,5 +14,6 @@ class TestUserProfile:
     @pytest.mark.sanity
     def test_bookslotPage_loading(self):
         self.signinP.successUserLogin()
-        self.bookSlotP.loadBookSlotPage()
+        fetchText = self.bookSlotP.loadBookSlotPage()
+        assert "Parking slots fetched successfully!" in fetchText
 

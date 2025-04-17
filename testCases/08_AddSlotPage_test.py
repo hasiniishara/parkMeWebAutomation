@@ -12,7 +12,7 @@ class TestUserProfile:
         self.addSlotP = AddSlotPage(self.driver)
 
     @pytest.mark.sanity
-    def test_userprofilePage_loading(self):
+    def test_uaddSlotPage_loading(self):
         self.signinP.successUserLogin()
         addSlotPageTitle = self.addSlotP.loadAddSlotPage()
         assert "Add Parking Slot" in addSlotPageTitle
