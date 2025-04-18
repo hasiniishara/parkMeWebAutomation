@@ -6,6 +6,9 @@ class BookSlotPage:
 
     bookSlotBtn = "//*[@id='root']/div/div[2]/div/div/div[2]/div/div/a"
     fetchToastEle = "//p[contains(@class, 'css-1fitlit')]"
+    deleteBtn = "//button[contains(text(), 'Delete')]"
+    slotDeleteModal = "//div[contains(@class, 'MuiPaper-root')]"
+    slotDeleteNoBtn = "//button[contains(text(),'Cancel')]"
 
     def __init__(self,driver):
         self.driver = driver
@@ -20,6 +23,26 @@ class BookSlotPage:
                 EC.presence_of_element_located((By.XPATH, self.fetchToastEle))
             ).text
             return fetchToastText
+        except Exception as e:
+            print(f"Error: {e}")
+            return e
+
+    def cancelDeleteSlot(self):
+        try:
+            deleteButtons = WebDriverWait(self.driver, 40).until(
+                EC.presence_of_all_elements_located((By.XPATH, self.deleteBtn))
+            )
+            print(len(deleteButtons))
+            if(len(deleteButtons) > 0):
+                deleteButtons[0].click()
+                modal = WebDriverWait(self.driver, 10).until(
+                    EC.visibility_of_element_located((By.XPATH, self.slotDeleteModal))
+                )
+                no_button = self.driver.find_element(By.XPATH, self.slotDeleteNoBtn)
+                no_button.click()
+            else:
+                print("No parking slots are available")
+
         except Exception as e:
             print(f"Error: {e}")
             return e
