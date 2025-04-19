@@ -17,10 +17,16 @@ class TestUserProfile:
         fetchText = self.bookSlotP.loadBookSlotPage()
         assert "Parking slots fetched successfully!" in fetchText
 
-    @pytest.mark.regression
+    @pytest.mark.sanity
     def test_cancel_slot_delete(self):
         self.signinP.successUserLogin()
         self.bookSlotP.loadBookSlotPage()
         self.bookSlotP.cancelDeleteSlot()
+
+    @pytest.mark.regression
+    def test_slot_delete(self):
+        self.signinP.successUserLogin()
+        self.bookSlotP.loadBookSlotPage()
+        self.bookSlotP.deleteSlot()
 
 

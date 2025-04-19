@@ -9,6 +9,7 @@ class BookSlotPage:
     deleteBtn = "//button[contains(text(), 'Delete')]"
     slotDeleteModal = "//div[contains(@class, 'MuiPaper-root')]"
     slotDeleteNoBtn = "//button[contains(text(),'Cancel')]"
+    slotDeleteYesBtn = "/html/body/div[2]/div[3]/div/div[2]/button[2]"
 
     def __init__(self,driver):
         self.driver = driver
@@ -33,7 +34,7 @@ class BookSlotPage:
                 EC.presence_of_all_elements_located((By.XPATH, self.deleteBtn))
             )
             print(len(deleteButtons))
-            if(len(deleteButtons) > 0):
+            if len(deleteButtons) > 0:
                 deleteButtons[0].click()
                 modal = WebDriverWait(self.driver, 10).until(
                     EC.visibility_of_element_located((By.XPATH, self.slotDeleteModal))
@@ -42,7 +43,24 @@ class BookSlotPage:
                 no_button.click()
             else:
                 print("No parking slots are available")
+        except Exception as e:
+            print(f"Error: {e}")
+            return e
 
+    def deleteSlot(self):
+        try:
+            deleteButtons = WebDriverWait(self.driver, 40).until(
+                EC.presence_of_all_elements_located((By.XPATH, self.deleteBtn))
+            )
+            if len(deleteButtons) > 0:
+                deleteButtons[0].click()
+                modal = WebDriverWait(self.driver, 10).until(
+                    EC.visibility_of_element_located((By.XPATH, self.slotDeleteModal))
+                )
+                yes_button = self.driver.find_element(By.XPATH, self.slotDeleteYesBtn)
+                yes_button.click()
+            else:
+                print("No parking slots are available")
         except Exception as e:
             print(f"Error: {e}")
             return e
