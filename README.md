@@ -40,5 +40,3 @@ This framework automates web application testing using Selenium WebDriver with P
 - WebDriver Manager (optional, for managing driver binaries)
 
 ---
-
-## Project Structure
